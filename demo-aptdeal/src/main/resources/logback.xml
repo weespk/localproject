@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="3 seconds">
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout>
+			<pattern>[%-5p][%d{yyyy-MM-dd HH:mm:ss}] %C{1}:%L %m %n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>../logs/log4j/apideal.infolog.log</File>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>[%-5p][%d{yyyy-MM-dd HH:mm:ss}] [%thread] %C{1}:%L %m %n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/log4j/apideal.infolog.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>../logs/log4j/apideal.error.log</File>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>[%-5p][%d{yyyy-MM-dd HH:mm:ss}] %C{1}:%L %m %n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>../logs/log4j/apideal.error.log.%d{yyyy-MM-dd}</fileNamePattern>
+			<maxHistory>1</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+    
+  	<logger name="org.springframework" level="info"></logger>
+<!--   	<logger name="com.posco.hanmadang" level="info"></logger> -->
+  	<logger name="java.sql" level="info"></logger>
+  	<logger name="jdbc.sqltiming" level="info"></logger>
+  	<logger name="org.mybatis" level="off"></logger>
+  	
+ 	<root level="info">
+  		<appender-ref ref="console" />
+  		<appender-ref ref="info" />
+  		<appender-ref ref="error" />
+	</root>
+	
+</configuration>
