@@ -1,0 +1,33 @@
+@startuml
+
+'skinparam ranksep 5
+'skinparam nodesep 5
+
+rectangle "aabb1" {
+    node aabb1 as a1
+    node aabb2 as a2
+}
+a1 --[hidden]> a2
+
+control "aabb3" as a3
+database "aabb4" as a4
+queue "aabb5" as a5
+control "aabb6" as a6
+control "aabb7" as a7
+database "aabb8" as a8
+control "aabb9" as a9
+
+a1 -> a3: Range
+a2 -> a3: 3D Models
+a3 -down-> a4: Range & Models
+a3 -> a5: product.\nupsert
+
+a5 -down-> a6: product.\nupsert
+a6 -> a5: product.\nprocessed
+
+a5 -> a7: product.processed
+a7 -> a8: Data
+a7 -> a5: product.\nstored
+
+
+@enduml

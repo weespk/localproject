@@ -1,0 +1,40 @@
+@startuml
+!theme toy
+title Test architecture design
+skinparam linetype ortho
+
+actor start
+actor end
+frame layerA {
+    package ProcessA #aaa {
+        node IE as n1
+    }
+    package ProcessB #aaa {
+        control chkNo as c1
+        node logic as n2
+    }
+    package ProcessC #aaa {
+        queue sumObject as q1
+    }
+    package ProcessD #aaa {
+        control chkSumobj as c2
+        node logic as n3
+    }
+}
+frame layerB {
+    database setting as d1
+    database billing as d2
+}
+
+
+start -> n1
+n1 --> c1
+c1 -> n2
+    n2 <--> d1
+c1 --> q1
+q1 --> c2
+    c2 --> n3
+    n3 -> d2
+    c2 -> end
+
+@enduml

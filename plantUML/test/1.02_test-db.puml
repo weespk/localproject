@@ -1,0 +1,14 @@
+@startuml
+
+
+class t1{
+- int id
++ string name
+}
+class t2 {
+- int id
+}
+
+t1 ||-|| t2
+
+@enduml
