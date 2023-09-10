@@ -12,15 +12,17 @@ frame Media {
 frame ResearchadService #aaa {
     component CoreLogic
     component Collector
+    node ResearchadSite
+    ResearchadSite <-> CoreLogic
 }
 frame Database {
     database 광고통계
     database 광고소재
 }
 
-User -> ResearchadService : Report & AdInformation
+User --> ResearchadSite : Report & AdInformation
 CoreLogic <--> Database
-Collector -> MediaSite : Clipping
-Collector -> Database
+Collector --> MediaSite : Clipping
+Collector --> Database
 
 @enduml
