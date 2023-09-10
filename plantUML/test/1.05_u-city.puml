@@ -1,0 +1,39 @@
+@startuml
+!theme toy
+skinparam linetype ortho
+
+title U-City architecture design
+
+frame Managing #aaa {
+    node ManagingPlatform
+    database ManagingData
+    node ESB as esb
+    esb -->> ManagingPlatform
+    ManagingPlatform <--> ManagingData
+}
+
+frame Offer {
+    node 유관기관
+    node 시설물
+}
+
+frame Collection {
+    node 시설물 as c1
+    node 교통정보 as c2
+    node 안전정보 as c3
+    node 환경정보 as c4
+    node 방재정보 as c5
+    node 에너지정보 as c6
+    node 행정정보 as c7
+}
+
+    c1 -> esb
+    c2 -> esb
+    c3 -> esb
+    c4 -> esb
+    c5 -> esb
+    c6 -> esb
+    c7 --> esb
+ManagingPlatform ->> Offer
+
+@enduml

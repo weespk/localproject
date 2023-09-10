@@ -2,11 +2,11 @@
 
 
 class t1{
-- int id
-+ string name
+    - id
+    + name
 }
 class t2 {
-- int id
+    - id
 }
 
 t1 ||-|| t2

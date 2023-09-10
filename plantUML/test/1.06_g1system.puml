@@ -1,0 +1,26 @@
+@startuml
+!theme toy
+skinparam linetype ortho
+
+title Researchad architecture design
+
+
+actor User
+frame Media {
+    node MediaSite
+}
+frame ResearchadService #aaa {
+    component CoreLogic
+    component Collector
+}
+frame Database {
+    database 광고통계
+    database 광고소재
+}
+
+User -> ResearchadService : Report & AdInformation
+CoreLogic <--> Database
+Collector -> MediaSite : Clipping
+Collector -> Database
+
+@enduml

@@ -1,0 +1,67 @@
+@startuml
+!theme toy
+
+title AdServer architecture design
+skinparam linetype ortho
+
+actor User as start
+
+actor Advertiser as adver
+actor Media as mess
+
+node IE as n1
+
+frame Billing #aaa {
+    package Consumer {
+        control Thread as c2
+        node Logic as n3
+    }
+    package Kafka {
+        queue Queue as q1
+    }
+}
+frame AdServer #aaa {
+    frame Task {
+        node Logic as n4
+        control Thread as c3
+    }
+    package AdSend {
+        control Thread as c1
+        node Logic as n2
+    }
+}
+frame WebPlatform {
+    node AdverSite as s1
+    node MessSite as s2
+}
+frame Storage #aaa {
+    frame Database {
+        database OtherData as d3
+        database AdSettingData as d1
+        database BillingData as d2
+    }
+    frame RadisServer {
+        node Radis as r1
+    }
+}
+
+start -> n1
+n1 <-> AdServer : 광고
+c1 --> n2
+    n2 <--> Storage
+AdServer -> q1
+q1 -> c2
+c2 --> n3
+    n3 -> d2
+    n3 -> d1
+c3 --> n4
+    n4 --> Storage
+s1 <--> Storage
+s2 <-> Storage
+adver --> s1
+mess --> s2
+r1 <--> d1
+r1 <-> d2
+r1 <-> d3
+
+@enduml
